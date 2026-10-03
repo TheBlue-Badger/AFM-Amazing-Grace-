@@ -1,0 +1,14 @@
+# Disable directory listing site-wide
+Options -Indexes
+
+# Never serve dotfiles (.env, .git, .htaccess itself, etc.)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Extra belt-and-braces headers (PHP also sets these; harmless if duplicated)
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
